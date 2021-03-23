@@ -1,0 +1,58 @@
+﻿<Window x:Class="LockerConstructor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LockerConstructor"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Locker Constructor - INDEV" Height="288.711" Width="490.342" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+	<Grid>
+		<DockPanel Margin="5,180,5,5">
+			<Border BorderBrush="Gray" BorderThickness="2" DockPanel.Dock="Top" Margin="0">
+				<ScrollViewer HorizontalContentAlignment="Center" CanContentScroll="True" PanningMode="HorizontalOnly" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Visible" DataContext="{Binding}">
+					<StackPanel HorizontalAlignment="Left" Margin="5,5,5,5" VerticalAlignment="Top" Orientation="Horizontal" Name="LockerPanel">
+					</StackPanel>
+				</ScrollViewer>
+			</Border>
+		</DockPanel>
+		<GroupBox Header="Ajouter un casier" HorizontalAlignment="Left" Height="103" Margin="10,10,0,0" VerticalAlignment="Top" Width="135" Name="AddLockGroupBox">
+			<Grid>
+				<Button Content="Ajouter" HorizontalAlignment="Left" Margin="22,54,0,0" VerticalAlignment="Top" Width="75" Click="AddButton_Click"/>
+				<ComboBox Width="110" Height="20" Margin="0,-30,0,0" Name="LockTypeBox">
+					<ComboBoxItem Content="H1" />
+					<ComboBoxItem Content="H2" />
+					<ComboBoxItem Content="H3" />
+					<ComboBoxItem Content="H4" />
+				</ComboBox>
+			</Grid>
+		</GroupBox>
+		<Button Content="Exporter" Width="76" Click="ExportButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="39,136,0,0"/>
+		<GroupBox Header="Options" HorizontalAlignment="Left" Height="158" Margin="163,10,0,0" VerticalAlignment="Top" Width="300">
+			<Grid>
+				<Label Content="Entraxe :" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+				<Label Content="Kit pied / patère :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,26,0,0"/>
+				<Label Content="Barre de penderie :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,52,0,0"/>
+				<Label Content="Type serrure :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,78,0,0"/>
+				<Label Content="Plaque de numérotation :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,104,0,0"/>
+				<xctk:IntegerUpDown Name="EntraxeUpDown" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="158,6,10,110" Width="120"/>
+				<ComboBox HorizontalAlignment="Left" Margin="158,82,0,0" VerticalAlignment="Top" Width="90" Name="TypeSerrBox"/>
+				<CheckBox Content="Patères" HorizontalAlignment="Left" Margin="220,32,0,0" VerticalAlignment="Top" Checked="PatereCheck_Checked" Unchecked="PatereCheck_Unchecked" Name="PatereCheck"/>
+				<CheckBox Content="Pieds" HorizontalAlignment="Left" Margin="158,32,0,0" VerticalAlignment="Top" Name="PiedCheck"/>
+				<ComboBox HorizontalAlignment="Left" Margin="158,55,0,0" VerticalAlignment="Top" Width="120" Name="PenderieBox">
+					<ComboBoxItem Content="Oui avec cintres"/>
+					<ComboBoxItem Content="Oui sans cintres"/>
+					<ComboBoxItem Content="Non"/>
+				</ComboBox>
+				<Button HorizontalAlignment="Left" Margin="255,82,0,0" VerticalAlignment="Top" Width="23" RenderTransformOrigin="0.913,-0.35" Height="22" Name="LockConfigBtn" Click="LockConfigBtn_Click">
+					<Image Source="Icones/key-icon.png"/>
+				</Button>
+				<ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Name="PlaqueBox" Margin="158,108,0,0">
+					<ComboBoxItem Content="Plaquette gravée 80x30 Gravoply"/>
+					<ComboBoxItem Content="Plaquette 70x40 Ojmar marquage Kalysse"/>
+					<ComboBoxItem Content="Non"/>
+				</ComboBox>
+			</Grid>
+		</GroupBox>
+	</Grid>
+</Window>

@@ -105,7 +105,7 @@ namespace LockerConstructor
 
         public bool ExportToFile(string path)
         {
-            if (Lockers.Count <= 1)
+            if (Lockers.Count < 1)
                 return (false);
             for (int i = 1; i < Lockers.Count; i++)
                 Refends.Add(FindLockerRefend(Lockers[i - 1], Lockers[i]));
@@ -123,8 +123,6 @@ namespace LockerConstructor
             lines.Add(".refends");
             for (int i = 0; i < Refends.Count; i++)
                 lines.Add(Refends[i]);
-
-
 
             File.WriteAllLines(path, lines);
 

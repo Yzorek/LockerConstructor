@@ -239,6 +239,7 @@ namespace LockerConstructor
 
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
+
             Exporter.Export();
             Application.Current.Shutdown();
         }

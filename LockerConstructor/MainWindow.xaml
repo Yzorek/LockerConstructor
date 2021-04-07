@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LockerConstructor"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Locker Constructor" Height="359.711" Width="490.342" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Locker Constructor" Height="359.711" Width="490.342" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True">
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="117*"/>

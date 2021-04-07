@@ -9,6 +9,9 @@ namespace LockerConstructor
 {
     class LockerReader
     {
+        /*
+         * Read list of locker from path
+         */
         public static List<Locker> Read(string path)
         {
             List<Locker> lockers = new List<Locker>();

@@ -35,6 +35,8 @@ namespace LockerConstructor
 
         public string FindLockerRefend(Locker lock1, Locker lock2)
         {
+            if (lock1.Type == lock2.Type)
+                return lock1.Type;
             return (lock1.Type + "P/" + lock2.Type + "G");
         }
 
@@ -144,7 +146,10 @@ namespace LockerConstructor
         public bool Export()
         {
 
-            return ExportToFile(_pathToFile);
+            bool ret = ExportToFile(_pathToFile);
+            Refends.Clear();
+            Lockers.Clear();
+            return ret;
         }
 
         public Locker GetLockerAt(int selectedLockerIdx)

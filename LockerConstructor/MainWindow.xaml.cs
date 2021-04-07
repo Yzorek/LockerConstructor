@@ -27,9 +27,6 @@ namespace LockerConstructor
     {
         public LockerExporter Exporter { get; set; }
         private List<LockInfos> Locks = new List<LockInfos>();
-        /*        private int SelectedLockIdx = -1;*/
-
-        private int _selectedLockerIdx = -1;
 
         public MainWindow()
         {
@@ -77,34 +74,33 @@ namespace LockerConstructor
 
         private void Btn_Click(object sender, RoutedEventArgs e)
         {
-            if (_selectedLockerIdx != -1)
+            int newIdx = LockerPanel.Children.IndexOf(sender as Button);
+            int oldIdx = GetSelectedLockerIndex();
+
+            if (oldIdx != -1)
             {
-                (LockerPanel.Children[_selectedLockerIdx] as Button).BorderBrush = Brushes.Gray;
+                (LockerPanel.Children[oldIdx] as Button).BorderBrush = Brushes.Gray;
             }
-            int idx = LockerPanel.Children.IndexOf(sender as Button);
-            if (_selectedLockerIdx == idx)
+            if (oldIdx == newIdx)
             {
-                _selectedLockerIdx = -1;
                 AddButton.IsEnabled = true;
             }
             else
             {
-                _selectedLockerIdx = idx;
-                (LockerPanel.Children[_selectedLockerIdx] as Button).BorderBrush = Brushes.Red;
-
-                Debug.WriteLine($"[] = " + Exporter.GetLockerAt(_selectedLockerIdx));
-                FillLockerInfos(Exporter.GetLockerAt(_selectedLockerIdx));
+                (LockerPanel.Children[newIdx] as Button).BorderBrush = Brushes.Red;
+                FillLockerInfos(Exporter.GetLockerAt(newIdx));
                 AddButton.IsEnabled = false;
             }
         }
 
         private void FillLockerInfos(Locker locker)
         {
+            Debug.WriteLine("Writing : " + locker);
+
             // type
             LockTypeBox.SelectedIndex = int.Parse(locker.Type[1] + "") - 1;
 
             // entraxe
-            Debug.WriteLine("writing locker : " + locker);
             EntraxeUpDown.Value = locker.Entraxe;
 
             // kit patere pieds
@@ -136,11 +132,12 @@ namespace LockerConstructor
             if (e.RightButton == MouseButtonState.Pressed)
             {
                 int idx = LockerPanel.Children.IndexOf(sender as Button);
-                if (_selectedLockerIdx != -1)
-                    (LockerPanel.Children[_selectedLockerIdx] as Button).BorderBrush = Brushes.Gray;
+                int oldIdx = GetSelectedLockerIndex();
+                if (oldIdx != -1)
+                    (LockerPanel.Children[oldIdx] as Button).BorderBrush = Brushes.Gray;
 
-                _selectedLockerIdx = idx;
-                (LockerPanel.Children[_selectedLockerIdx] as Button).BorderBrush = Brushes.Red;
+                //_selectedLockerIdx = idx;
+
 
                 ContextMenu cm = new ContextMenu();
                 MenuItem delItem = new MenuItem();
@@ -179,28 +176,31 @@ namespace LockerConstructor
 
         private void MoveRightItem_Click(object sender, RoutedEventArgs ev)
         {
-            Exporter.Swap(_selectedLockerIdx, _selectedLockerIdx + 1);
-            string type1 = (LockerPanel.Children[_selectedLockerIdx] as Button).Content.ToString();
-            string type2 = (LockerPanel.Children[_selectedLockerIdx + 1] as Button).Content.ToString();
+            int selectedIdx = GetSelectedLockerIndex();
+            Exporter.Swap(selectedIdx, selectedIdx + 1);
+            string type1 = (LockerPanel.Children[selectedIdx] as Button).Content.ToString();
+            string type2 = (LockerPanel.Children[selectedIdx + 1] as Button).Content.ToString();
 
-            (LockerPanel.Children[_selectedLockerIdx] as Button).Content = type2;
-            (LockerPanel.Children[_selectedLockerIdx + 1] as Button).Content = type1;
+            (LockerPanel.Children[selectedIdx] as Button).Content = type2;
+            (LockerPanel.Children[selectedIdx + 1] as Button).Content = type1;
         }
 
         private void MoveLeftItem_Click(object sender, RoutedEventArgs ev)
         {
-            Exporter.Swap(_selectedLockerIdx -1, _selectedLockerIdx);
-            string type1 = (LockerPanel.Children[_selectedLockerIdx] as Button).Content.ToString();
-            string type2 = (LockerPanel.Children[_selectedLockerIdx-1] as Button).Content.ToString();
+            int selectedIdx = GetSelectedLockerIndex();
+            Exporter.Swap(selectedIdx - 1, selectedIdx);
+            string type1 = (LockerPanel.Children[selectedIdx] as Button).Content.ToString();
+            string type2 = (LockerPanel.Children[selectedIdx - 1] as Button).Content.ToString();
 
-            (LockerPanel.Children[_selectedLockerIdx] as Button).Content = type2;
-            (LockerPanel.Children[_selectedLockerIdx - 1] as Button).Content = type1;
+            (LockerPanel.Children[selectedIdx] as Button).Content = type2;
+            (LockerPanel.Children[selectedIdx - 1] as Button).Content = type1;
         }
 
         private void DuplicateItem_Click(object sender, RoutedEventArgs ev)
         {
-            Locker currentLocker = Exporter.GetLockerAt(_selectedLockerIdx);
-            InsertRight(_selectedLockerIdx, currentLocker);
+            int selectedIdx = GetSelectedLockerIndex();
+            Locker currentLocker = Exporter.GetLockerAt(selectedIdx);
+            InsertRight(selectedIdx, currentLocker);
         }
 
         private void InsRItem_Click(object sender, RoutedEventArgs e)
@@ -222,7 +222,7 @@ namespace LockerConstructor
             int idx = LockerPanel.Children.IndexOf(sender as Button);
             Locker locker = CreateLockerFromInfos();
             Button btn = CreateLockerButton(locker.Type);
-            _selectedLockerIdx++;
+//            _selectedLockerIdx++;
 
             LockerPanel.Children.Insert(idx, btn);
             Exporter.InsertLocker(idx, locker);
@@ -293,14 +293,16 @@ namespace LockerConstructor
         private void LockTypeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateSelectedLockerInfos();
-            if (_selectedLockerIdx != -1)
-                (LockerPanel.Children[_selectedLockerIdx] as Button).Content = Exporter.GetLockerAt(_selectedLockerIdx).Type;
+            int idx = GetSelectedLockerIndex();
+            if (idx != -1)
+                (LockerPanel.Children[idx] as Button).Content = Exporter.GetLockerAt(idx).Type;
         }
 
         private void UpdateSelectedLockerInfos()
         {
-            if (_selectedLockerIdx != -1)
-                Exporter.Set(_selectedLockerIdx, CreateLockerFromInfos());
+            int idx = GetSelectedLockerIndex();
+            if (idx != -1)
+                Exporter.Set(idx, CreateLockerFromInfos());
             DisableIncompatibleOptions();
         }
 
@@ -366,7 +368,18 @@ namespace LockerConstructor
 
             return new Locker(type, entraxe, typeSerr, kitPiedPat, isPend, typePlaq);
         }
+        private int GetSelectedLockerIndex()
+        {
+            int idx = 0;
+            foreach (Button button in LockerPanel.Children)
+            {
+                if (button.BorderBrush == Brushes.Red)
+                    return idx;
 
+                idx++;
+            }
+            return -1;
+        }
 
         private void Import_Click(object sender, RoutedEventArgs e)
         {

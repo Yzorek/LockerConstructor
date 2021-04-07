@@ -176,7 +176,7 @@ namespace LockerConstructor
 
         private void MoveRightItem_Click(object sender, RoutedEventArgs ev)
         {
-            int selectedIdx = GetSelectedLockerIndex();
+            int selectedIdx = LockerPanel.Children.IndexOf(sender as Button);
             Exporter.Swap(selectedIdx, selectedIdx + 1);
             string type1 = (LockerPanel.Children[selectedIdx] as Button).Content.ToString();
             string type2 = (LockerPanel.Children[selectedIdx + 1] as Button).Content.ToString();
@@ -187,7 +187,7 @@ namespace LockerConstructor
 
         private void MoveLeftItem_Click(object sender, RoutedEventArgs ev)
         {
-            int selectedIdx = GetSelectedLockerIndex();
+            int selectedIdx = LockerPanel.Children.IndexOf(sender as Button);
             Exporter.Swap(selectedIdx - 1, selectedIdx);
             string type1 = (LockerPanel.Children[selectedIdx] as Button).Content.ToString();
             string type2 = (LockerPanel.Children[selectedIdx - 1] as Button).Content.ToString();
@@ -198,16 +198,16 @@ namespace LockerConstructor
 
         private void DuplicateItem_Click(object sender, RoutedEventArgs ev)
         {
-            int selectedIdx = GetSelectedLockerIndex();
+            int selectedIdx = LockerPanel.Children.IndexOf(sender as Button);
             Locker currentLocker = Exporter.GetLockerAt(selectedIdx);
             InsertRight(selectedIdx, currentLocker);
         }
 
         private void InsRItem_Click(object sender, RoutedEventArgs e)
         {
-            int idx = LockerPanel.Children.IndexOf(sender as Button);
+            int selectedIdx = LockerPanel.Children.IndexOf(sender as Button);
             Locker locker = CreateLockerFromInfos();
-            InsertRight(idx, locker);
+            InsertRight(selectedIdx, locker);
         }
 
         private void InsertRight(int idx, Locker locker)

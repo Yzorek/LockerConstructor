@@ -10,9 +10,10 @@
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="117*"/>
-			<ColumnDefinition Width="367*"/>
+			<ColumnDefinition Width="8*"/>
+			<ColumnDefinition Width="359*"/>
 		</Grid.ColumnDefinitions>
-		<DockPanel Margin="5,211,5,0" Grid.ColumnSpan="2" VerticalAlignment="Top" Height="74">
+		<DockPanel Margin="5,211,5,0" Grid.ColumnSpan="3" VerticalAlignment="Top" Height="74">
 			<Border BorderBrush="Gray" BorderThickness="2" DockPanel.Dock="Top" Margin="0">
 				<ScrollViewer HorizontalContentAlignment="Center" CanContentScroll="True" PanningMode="HorizontalOnly" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Visible" DataContext="{Binding}">
 					<StackPanel HorizontalAlignment="Left" Margin="5,5,5,5" VerticalAlignment="Top" Orientation="Horizontal" x:Name="LockerPanel"/>
@@ -20,14 +21,14 @@
 			</Border>
 		</DockPanel>
 
-		<Grid HorizontalAlignment="Right" Margin="0,303,5,0"  VerticalAlignment="Top" Grid.Column="1">
+		<Grid HorizontalAlignment="Right" Margin="0,303,5,0"  VerticalAlignment="Top" Grid.Column="2">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 		</Grid>
 
-		<GroupBox Header="Options" HorizontalAlignment="Left" Height="187" Margin="10,10,0,0" VerticalAlignment="Top" Width="300" Grid.ColumnSpan="2">
+		<GroupBox Header="Options" HorizontalAlignment="Left" Height="187" Margin="10,10,0,0" VerticalAlignment="Top" Width="300" Grid.ColumnSpan="3">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="37*"/>
@@ -69,7 +70,7 @@
 				<Label Content="Type :" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
 			</Grid>
 		</GroupBox>
-		<GroupBox Header="Actions" HorizontalAlignment="Left" Height="168" Margin="208,10,0,0" VerticalAlignment="Top" Width="116" x:Name="AddLockGroupBox_Copy" Grid.Column="1">
+		<GroupBox Header="Actions" HorizontalAlignment="Left" Height="168" Margin="200,10,0,0" VerticalAlignment="Top" Width="116" x:Name="AddLockGroupBox_Copy" Grid.Column="2">
 			<Grid >
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
@@ -81,7 +82,7 @@
 
 			</Grid>
 		</GroupBox>
-		<Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="122,290,0,0" Width="221">
+		<Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="114,290,0,0" Width="221">
 
 			<Grid.ColumnDefinitions>
 			</Grid.ColumnDefinitions>

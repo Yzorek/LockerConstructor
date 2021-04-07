@@ -1,0 +1,20 @@
+﻿<Window x:Class="LockerConstructor.NumberPromptDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LockerConstructor"		
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+		WindowStartupLocation="CenterOwner"
+        Title="Nombre de multiplications" Height="110" Width="196.781"
+		ResizeMode="NoResize">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="97*"/>
+			<ColumnDefinition Width="92*"/>
+		</Grid.ColumnDefinitions>
+		<xctk:IntegerUpDown Value="1" Name="NumberUpDown" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="10" Grid.ColumnSpan="2" />
+		<Button Content="Valider" HorizontalAlignment="Center" VerticalAlignment="Top" Width="76" Name="Validate" Margin="0,35,0,0" Grid.ColumnSpan="2" Click="Validate_Click" />
+	</Grid>
+</Window>

@@ -6,53 +6,87 @@
         xmlns:local="clr-namespace:LockerConstructor"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Locker Constructor - INDEV" Height="288.711" Width="490.342" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Locker Constructor" Height="359.711" Width="490.342" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 	<Grid>
-		<DockPanel Margin="5,180,5,5">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="117*"/>
+			<ColumnDefinition Width="367*"/>
+		</Grid.ColumnDefinitions>
+		<DockPanel Margin="5,211,5,0" Grid.ColumnSpan="2" VerticalAlignment="Top" Height="74">
 			<Border BorderBrush="Gray" BorderThickness="2" DockPanel.Dock="Top" Margin="0">
 				<ScrollViewer HorizontalContentAlignment="Center" CanContentScroll="True" PanningMode="HorizontalOnly" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Visible" DataContext="{Binding}">
-					<StackPanel HorizontalAlignment="Left" Margin="5,5,5,5" VerticalAlignment="Top" Orientation="Horizontal" Name="LockerPanel">
-					</StackPanel>
+					<StackPanel HorizontalAlignment="Left" Margin="5,5,5,5" VerticalAlignment="Top" Orientation="Horizontal" x:Name="LockerPanel"/>
 				</ScrollViewer>
 			</Border>
 		</DockPanel>
-		<GroupBox Header="Ajouter un casier" HorizontalAlignment="Left" Height="103" Margin="10,10,0,0" VerticalAlignment="Top" Width="135" Name="AddLockGroupBox">
+
+		<Grid HorizontalAlignment="Right" Margin="0,303,5,0"  VerticalAlignment="Top" Grid.Column="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+		</Grid>
+
+		<GroupBox Header="Options" HorizontalAlignment="Left" Height="187" Margin="10,10,0,0" VerticalAlignment="Top" Width="300" Grid.ColumnSpan="2">
 			<Grid>
-				<Button Content="Ajouter" HorizontalAlignment="Left" Margin="22,54,0,0" VerticalAlignment="Top" Width="75" Click="AddButton_Click"/>
-				<ComboBox Width="110" Height="20" Margin="0,-30,0,0" Name="LockTypeBox">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="37*"/>
+					<ColumnDefinition Width="73*"/>
+					<ColumnDefinition Width="87*"/>
+					<ColumnDefinition Width="38*"/>
+					<ColumnDefinition Width="11*"/>
+					<ColumnDefinition Width="18*"/>
+					<ColumnDefinition Width="24*"/>
+				</Grid.ColumnDefinitions>
+				<ComboBox Margin="48,4,10,0" VerticalAlignment="Top" Width="120" Name="LockTypeBox" Grid.Column="2" Grid.ColumnSpan="5" SelectionChanged="LockTypeBox_SelectionChanged">
 					<ComboBoxItem Content="H1" />
 					<ComboBoxItem Content="H2" />
 					<ComboBoxItem Content="H3" />
 					<ComboBoxItem Content="H4" />
 				</ComboBox>
-			</Grid>
-		</GroupBox>
-		<Button Content="Exporter" Width="76" Click="ExportButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="39,136,0,0"/>
-		<GroupBox Header="Options" HorizontalAlignment="Left" Height="158" Margin="163,10,0,0" VerticalAlignment="Top" Width="300">
-			<Grid>
-				<Label Content="Entraxe :" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-				<Label Content="Kit pied / patère :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,26,0,0"/>
-				<Label Content="Barre de penderie :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,52,0,0"/>
-				<Label Content="Type serrure :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,78,0,0"/>
-				<Label Content="Plaque de numérotation :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,104,0,0"/>
-				<xctk:IntegerUpDown Name="EntraxeUpDown" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="158,6,10,110" Width="120"/>
-				<ComboBox HorizontalAlignment="Left" Margin="158,82,0,0" VerticalAlignment="Top" Width="90" Name="TypeSerrBox"/>
-				<CheckBox Content="Patères" HorizontalAlignment="Left" Margin="220,32,0,0" VerticalAlignment="Top" Checked="PatereCheck_Checked" Unchecked="PatereCheck_Unchecked" Name="PatereCheck"/>
-				<CheckBox Content="Pieds" HorizontalAlignment="Left" Margin="158,32,0,0" VerticalAlignment="Top" Name="PiedCheck"/>
-				<ComboBox HorizontalAlignment="Left" Margin="158,55,0,0" VerticalAlignment="Top" Width="120" Name="PenderieBox">
+				<Label Content="Entraxe :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,24,0,0" Grid.ColumnSpan="2"/>
+				<Label Content="Kit pied / patère :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,50,0,0" Grid.ColumnSpan="2"/>
+				<Label Content="Barre de penderie :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,76,0,0" Grid.ColumnSpan="2"/>
+				<Label Content="Type serrure :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,102,0,0" Grid.ColumnSpan="2"/>
+				<Label Content="Plaque de numérotation :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,128,0,0" Grid.ColumnSpan="3"/>
+				<xctk:IntegerUpDown LostFocus="EntraxeUpDown_SelectionChanged" Name="EntraxeUpDown" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="48,30,10,0" Width="120" Grid.Column="2" Grid.ColumnSpan="5" />
+				<ComboBox HorizontalAlignment="Left" Margin="48,106,0,0" VerticalAlignment="Top" Width="90" Name="TypeSerrBox" SelectionChanged="TypeSerrBox_SelectionChanged_1" Grid.Column="2" Grid.ColumnSpan="4" />
+				<CheckBox Content="Patères" HorizontalAlignment="Left" Margin="23,56,0,0" VerticalAlignment="Top" Checked="PatereCheck_Checked" Unchecked="PatereCheck_Unchecked" Name="PatereCheck" Grid.Column="3" Grid.ColumnSpan="4"/>
+				<CheckBox Content="Pieds" HorizontalAlignment="Left" Margin="48,56,0,0" VerticalAlignment="Top" Name="PiedCheck" Checked="PiedCheck_SelectionChanged" Unchecked="PiedCheck_SelectionChanged" Grid.Column="2" Grid.ColumnSpan="2"/>
+				<ComboBox HorizontalAlignment="Left" Margin="48,79,0,0" VerticalAlignment="Top" Width="120" Name="PenderieBox" SelectionChanged="PenderieBox_SelectionChanged" Grid.Column="2" Grid.ColumnSpan="5">
+					<ComboBoxItem Content="Non"/>
 					<ComboBoxItem Content="Oui avec cintres"/>
 					<ComboBoxItem Content="Oui sans cintres"/>
-					<ComboBoxItem Content="Non"/>
 				</ComboBox>
-				<Button HorizontalAlignment="Left" Margin="255,82,0,0" VerticalAlignment="Top" Width="23" RenderTransformOrigin="0.913,-0.35" Height="22" Name="LockConfigBtn" Click="LockConfigBtn_Click">
+				<Button HorizontalAlignment="Left" Margin="9,106,0,0" VerticalAlignment="Top" Width="23" RenderTransformOrigin="0.913,-0.35" Height="22" Name="LockConfigBtn" Click="LockConfigBtn_Click" Grid.Column="5" Grid.ColumnSpan="2">
 					<Image Source="Icones/key-icon.png"/>
 				</Button>
-				<ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Name="PlaqueBox" Margin="158,108,0,0">
+				<ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Name="PlaqueBox" Margin="48,132,0,0" SelectionChanged="PlaqueBox_SelectionChanged" Grid.Column="2" Grid.ColumnSpan="5">
+					<ComboBoxItem Content="Non"/>
 					<ComboBoxItem Content="Plaquette gravée 80x30 Gravoply"/>
 					<ComboBoxItem Content="Plaquette 70x40 Ojmar marquage Kalysse"/>
-					<ComboBoxItem Content="Non"/>
 				</ComboBox>
+				<Label Content="Type :" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
 			</Grid>
 		</GroupBox>
+		<GroupBox Header="Actions" HorizontalAlignment="Left" Height="168" Margin="208,10,0,0" VerticalAlignment="Top" Width="116" x:Name="AddLockGroupBox_Copy" Grid.Column="1">
+			<Grid >
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<Button Content="Importer..." HorizontalAlignment="Left" VerticalAlignment="Top"  x:Name="Import" Click="Import_Click" Height="24" Width="97" Margin="3,82,0,0"/>
+				<Button Content="Multiplier..." HorizontalAlignment="Left" Margin="3,39,0,0" VerticalAlignment="Top"  x:Name="Multiply" Click="Multiply_Click" Height="24" Width="97"/>
+				<Button Content="Ajouter" x:Name="AddButton" HorizontalAlignment="Left" VerticalAlignment="Top"  Click="AddButton_Click" Width="97" Height="24" Margin="3,10,0,0" />
+				<Button Content="Exporter sous..."  Click="ExportButtonUnder_Click" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="24"  Width="97" Margin="3,111,0,0"   />
+
+			</Grid>
+		</GroupBox>
+		<Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="122,290,0,0" Width="221">
+
+			<Grid.ColumnDefinitions>
+			</Grid.ColumnDefinitions>
+			<Button Content="Dessiner" Width="106" Click="ExportButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="24" Grid.RowSpan="2"  Margin="120,0,-20,0" />
+		</Grid>
+
 	</Grid>
 </Window>

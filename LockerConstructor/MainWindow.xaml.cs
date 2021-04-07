@@ -416,14 +416,12 @@ namespace LockerConstructor
             
         }
 
-        /*
-         * Add locker to exporter and display the new button
-         */
         private void AddLocker(Locker locker)
         {
             Button btn = CreateLockerButton(locker.Type);
             LockerPanel.Children.Add(btn);
             Exporter.AddLocker(locker);
+            TotalCount.Content = $"{LockerPanel.Children.Count} casier(s)";
         }
 
         private void Multiply_Click(object sender, RoutedEventArgs e)

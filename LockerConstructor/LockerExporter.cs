@@ -143,7 +143,7 @@ namespace LockerConstructor
 
         public bool Export()
         {
-
+            Debug.WriteLine(this.Lockers);
             bool ret = ExportToFile(_pathToFile);
             Refends.Clear();
             Lockers.Clear();

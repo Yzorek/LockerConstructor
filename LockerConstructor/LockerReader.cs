@@ -30,6 +30,7 @@ namespace LockerConstructor
                  idxInfosSection++;
             }
            
+            // read each locker line by line 
             for (int i = idxInfosSection+1; i < lines.Length; i++)
             {
                 if (lines[i] == ".refends")

@@ -87,6 +87,7 @@
 			</Grid.ColumnDefinitions>
 			<Button Content="Dessiner" Width="106" Click="ExportButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="24" Grid.RowSpan="2"  Margin="120,0,-20,0" />
 		</Grid>
+		<Label Name="TotalCount" Content="0 casier(s)" HorizontalAlignment="Left" Margin="5,285,0,0" VerticalAlignment="Top" Width="78"/>
 
 	</Grid>
 </Window>

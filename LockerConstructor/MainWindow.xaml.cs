@@ -40,9 +40,7 @@ namespace LockerConstructor
 			InitializeComponent();
 			Exporter = new LockerExporter(@"\\Serv-kalysse\EDatas\Dev\Datas\LockerConstuctor\locker_list.txt");
 			FillTypeSerrBox();
-			Locker newLocker = new Locker("h1", 300, "Serrure monnayeur,129.001,209.001", 0, 0, 0);
-			FillLockerInfos(newLocker);
-
+			FillLockerInfos(new Locker("h1", 300, "Serrure monnayeur,129.001,209.001", 0, 0, 0));
 
 			if (FindDesignCAD())                                                                        // Tests if there is an opened app
 			{
@@ -56,9 +54,8 @@ namespace LockerConstructor
 				switch (dialogResult)
 				{
 					case MessageBoxResult.Yes:
-						//Process.Start(@"C:\Program Files\Cogistem\DesignCAD Pro 10\DCCC.exe");
 						App = new DesignCADApp { Visible = true };
-						//App = (Application)Interaction.GetObject(null, "DesignCAD.Application.26");
+						//App = (DesignCADApp)Interaction.GetObject(null, "DesignCAD.Application.26");
 						DcDoc = App.ActiveDocument;
 						break;
 					case MessageBoxResult.No:
@@ -144,8 +141,6 @@ namespace LockerConstructor
 
 		private void FillLockerInfos(Locker locker)
 		{
-			Debug.WriteLine("Writing : " + locker);
-
 			// type
 			LockTypeBox.SelectedIndex = int.Parse(locker.Type[1] + "") - 1;
 
@@ -184,9 +179,6 @@ namespace LockerConstructor
 				int oldIdx = GetSelectedLockerIndex();
 				if (oldIdx != -1)
 					(LockerPanel.Children[oldIdx] as Button).BorderBrush = Brushes.Gray;
-
-				//_selectedLockerIdx = idx;
-
 
 				ContextMenu cm = new ContextMenu();
 				MenuItem delItem = new MenuItem();
@@ -271,7 +263,6 @@ namespace LockerConstructor
 			int idx = LockerPanel.Children.IndexOf(sender as Button);
 			Locker locker = CreateLockerFromInfos();
 			Button btn = CreateLockerButton(locker.Type);
-			//            _selectedLockerIdx++;
 
 			LockerPanel.Children.Insert(idx, btn);
 			Exporter.InsertLocker(idx, locker);
@@ -293,9 +284,8 @@ namespace LockerConstructor
 			App.BringToTop();
 			Topmost = false;
 
-			DcDoc.RunBasicCAD(@"\\serv-kalysse\BE\Macros et interface\Kalysse DesignCAD\dev\locker_constructor.d3m");
 			DcDoc.ResumeBasicCAD();
-			
+
 			System.Windows.Application.Current.Shutdown();
 		}
 		private void ExportButtonUnder_Click(object sender, RoutedEventArgs e)

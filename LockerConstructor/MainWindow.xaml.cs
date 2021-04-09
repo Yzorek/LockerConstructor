@@ -301,6 +301,8 @@ namespace LockerConstructor
 				return;
 
 			Exporter.ExportToFile(saveFileDialog.FileName);
+
+			LockerReader.Read(saveFileDialog.FileName);
 		}
 
 		private void PatereCheck_Checked(object sender, RoutedEventArgs e)
@@ -353,7 +355,7 @@ namespace LockerConstructor
 		{
 			int idx = GetSelectedLockerIndex();
 			if (idx != -1)
-				Exporter.Set(idx, CreateLockerFromInfos());
+				Exporter.SetLocker(idx, CreateLockerFromInfos());
 			DisableIncompatibleOptions();
 		}
 
@@ -449,10 +451,7 @@ namespace LockerConstructor
 			List<Locker> lockers = LockerReader.Read(openFileDialog.FileName);
 			for (int i = 0; i < dlg.Value; i++)
 			{
-				foreach (var locker in lockers)
-				{
-					AddLocker(locker);
-				}
+				ImportLockers(lockers);
 			}
 		}
 
@@ -487,10 +486,15 @@ namespace LockerConstructor
 
 			List<Locker> l = Exporter.CopyLockers();
 			for (int i = 1; i < dlg.Value; i++)
-				foreach (var locker in l)
-				{
-					AddLocker(locker);
-				}
+				ImportLockers(l);
+		}
+
+		private void ImportLockers(List<Locker> lockers)
+		{
+			foreach (var locker in lockers)
+			{
+				AddLocker(locker);
+			}
 		}
 
 	}

@@ -13,8 +13,6 @@ namespace LockerConstructor
         private string _pathToFile;
 
 
-        private List<string> Refends { get; set; }
-
         private Locker? LeftLocker { get; set; }
 
         private Locker? RightLocker { get; set; }
@@ -25,7 +23,7 @@ namespace LockerConstructor
         public LockerExporter(string pathToFile)
         {
             _pathToFile = pathToFile;
-            Refends = new List<string>();
+            
             LeftLocker = null;
             RightLocker = null;
             Lockers = new List<Locker>() {
@@ -106,10 +104,14 @@ namespace LockerConstructor
 
         public bool ExportToFile(string path)
         {
+            List<string> refends = new List<string>();
             if (Lockers.Count < 1)
                 return (false);
             for (int i = 1; i < Lockers.Count; i++)
-                Refends.Add(FindLockerRefend(Lockers[i - 1], Lockers[i]));
+			{
+                
+                refends.Add(FindLockerRefend(Lockers[i - 1], Lockers[i]));
+            }
 
             List<string> lines = new List<string>();
 
@@ -122,8 +124,8 @@ namespace LockerConstructor
                 lines.Add(ToFileFormat(locker));
 
             lines.Add(".refends");
-            for (int i = 0; i < Refends.Count; i++)
-                lines.Add(Refends[i]);
+            for (int i = 0; i < refends.Count; i++)
+                lines.Add(refends[i]);
 
             File.WriteAllLines(path, lines);
 
@@ -145,7 +147,6 @@ namespace LockerConstructor
         public bool Export()
         {
             bool ret = ExportToFile(_pathToFile);
-            Refends.Clear();
             Lockers.Clear();
             return ret;
         }
@@ -155,11 +156,11 @@ namespace LockerConstructor
             return Lockers[selectedLockerIdx];
         }
 
-        public void Set(int idx, Locker locker)
+        public void SetLocker(int idx, Locker locker)
         {
             Lockers[idx] = locker;
         }
-    }
+	}
 
     public struct LockInfos
     {

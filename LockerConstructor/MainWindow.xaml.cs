@@ -471,7 +471,7 @@ namespace LockerConstructor
 
 		private void UpdateTotalLockers()
 		{
-			TotalCount.Content = $"{LockerPanel.Children.Count} casier(s)";
+			TotalCount.Content = $"{LockerPanel.Children.Count} casier{(LockerPanel.Children.Count > 1 ? "s" : "")}";
 		}
 
 		private void Multiply_Click(object sender, RoutedEventArgs e)

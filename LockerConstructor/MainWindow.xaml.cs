@@ -317,9 +317,12 @@ namespace LockerConstructor
 		}
 		private void LockConfigBtn_Click(object sender, RoutedEventArgs e)
 		{
+			Topmost = false;
 			Process proc = Process.Start(@"\\SERV-KALYSSE\EDatas\Logiciels\LockConfig\LockConfig.exe");
 
 			proc.WaitForExit();
+			Topmost = true;
+
 			FillTypeSerrBox();
 		}
 		private void EntraxeUpDown_SelectionChanged(object sender, RoutedEventArgs e)

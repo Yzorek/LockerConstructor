@@ -87,12 +87,13 @@ namespace LockerConstructor
         {
             Lockers.RemoveAt(id);
 
+
             if (id == 0 && Lockers.Count > 0)
             {
                 LeftLocker = Lockers[0];
             }
 
-            if (id == Lockers.Count)
+            if (id == Lockers.Count && id != 0)
             {
                 RightLocker = Lockers[id - 1];
             }

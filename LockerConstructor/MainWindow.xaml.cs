@@ -242,6 +242,7 @@ namespace LockerConstructor
 			int selectedIdx = LockerPanel.Children.IndexOf(sender as Button);
 			Locker currentLocker = Exporter.GetLockerAt(selectedIdx);
 			InsertRight(selectedIdx, currentLocker);
+			UpdateTotalLockers();
 		}
 
 		private void InsRItem_Click(object sender, RoutedEventArgs e)
@@ -256,6 +257,7 @@ namespace LockerConstructor
 			Button btn = CreateLockerButton(locker.Type);
 			LockerPanel.Children.Insert(idx + 1, btn);
 			Exporter.InsertLocker(idx + 1, locker);
+			UpdateTotalLockers();
 		}
 
 		private void InsLItem_Click(object sender, RoutedEventArgs e)
@@ -266,6 +268,7 @@ namespace LockerConstructor
 
 			LockerPanel.Children.Insert(idx, btn);
 			Exporter.InsertLocker(idx, locker);
+			UpdateTotalLockers();
 		}
 
 		private void DelItem_Click(object sender, RoutedEventArgs e)
@@ -273,6 +276,7 @@ namespace LockerConstructor
 			int idx = LockerPanel.Children.IndexOf(sender as Button);
 			LockerPanel.Children.Remove(sender as Button);
 			Exporter.DeleteLocker(idx);
+			UpdateTotalLockers();
 		}
 
 
@@ -462,6 +466,11 @@ namespace LockerConstructor
 			Button btn = CreateLockerButton(locker.Type);
 			LockerPanel.Children.Add(btn);
 			Exporter.AddLocker(locker);
+			UpdateTotalLockers();
+		}
+
+		private void UpdateTotalLockers()
+		{
 			TotalCount.Content = $"{LockerPanel.Children.Count} casier(s)";
 		}
 

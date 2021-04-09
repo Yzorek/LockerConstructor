@@ -33,7 +33,6 @@ namespace LockerConstructor
 		private List<LockInfos> Locks = new List<LockInfos>();
 		private DesignCADApp App;
 		private Document DcDoc;
-		private short _currentLayer;
 
 		public MainWindow()
 		{
@@ -68,12 +67,11 @@ namespace LockerConstructor
 			}
 
 			Closed += MainWindow_Closed;
-			_currentLayer = DcDoc.LayerIndex;
 		}
 
 		private void MainWindow_Closed(object sender, EventArgs e)
 		{
-			DcDoc.LayerIndex = _currentLayer;
+			DcDoc.ResumeBasicCAD();
 		}
 
 		private bool FindDesignCAD()
@@ -472,6 +470,8 @@ namespace LockerConstructor
 		private void UpdateTotalLockers()
 		{
 			TotalCount.Content = $"{LockerPanel.Children.Count} casier{(LockerPanel.Children.Count > 1 ? "s" : "")}";
+			DrawButton.IsEnabled = LockerPanel.Children.Count > 0;
+			ExportUnderButton.IsEnabled = LockerPanel.Children.Count > 0;
 		}
 
 		private void Multiply_Click(object sender, RoutedEventArgs e)

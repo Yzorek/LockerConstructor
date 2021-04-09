@@ -78,7 +78,7 @@
 				<Button Content="Importer..." HorizontalAlignment="Left" VerticalAlignment="Top"  x:Name="Import" Click="Import_Click" Height="24" Width="97" Margin="3,82,0,0"/>
 				<Button Content="Multiplier..." HorizontalAlignment="Left" Margin="3,39,0,0" VerticalAlignment="Top"  x:Name="Multiply" Click="Multiply_Click" Height="24" Width="97"/>
 				<Button Content="Ajouter" x:Name="AddButton" HorizontalAlignment="Left" VerticalAlignment="Top"  Click="AddButton_Click" Width="97" Height="24" Margin="3,10,0,0" />
-				<Button Content="Exporter sous..."  Click="ExportButtonUnder_Click" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="24"  Width="97" Margin="3,111,0,0"   />
+				<Button Content="Exporter sous..." IsEnabled="False" Name="ExportUnderButton" Click="ExportButtonUnder_Click" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="24"  Width="97" Margin="3,111,0,0"   />
 
 			</Grid>
 		</GroupBox>
@@ -86,7 +86,7 @@
 
 			<Grid.ColumnDefinitions>
 			</Grid.ColumnDefinitions>
-			<Button Content="Dessiner" Width="106" Click="ExportButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="24" Grid.RowSpan="2"  Margin="120,0,-20,0" />
+			<Button Content="Dessiner" Name="DrawButton" Width="106" Click="ExportButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="24" Grid.RowSpan="2"  Margin="120,0,-20,0" IsEnabled="False" />
 		</Grid>
 		<Label Name="TotalCount" Content="0 casier" HorizontalAlignment="Left" Margin="5,285,0,0" VerticalAlignment="Top" Width="78"/>
 

@@ -71,7 +71,12 @@ namespace LockerConstructor
 
 		private void MainWindow_Closed(object sender, EventArgs e)
 		{
+			DcDoc = App.ActiveDocument;
+#if DEBUG
+			DcDoc.RunBasicCAD(@"\\serv-kalysse\BE\Macros et interface\Kalysse DesignCAD\macros_symboles\refend_apd.d3m");
+#else
 			DcDoc.ResumeBasicCAD();
+#endif
 		}
 
 		private bool FindDesignCAD()

@@ -44,6 +44,7 @@
 					<ComboBoxItem Content="H2" />
 					<ComboBoxItem Content="H3" />
 					<ComboBoxItem Content="H4" />
+					<ComboBoxItem Content="HZ" />
 				</ComboBox>
 				<Label Content="Entraxe :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,24,0,0" Grid.ColumnSpan="2"/>
 				<Label Content="Kit pied / patère :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,50,0,0" Grid.ColumnSpan="2"/>

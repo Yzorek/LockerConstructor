@@ -15,6 +15,7 @@
 				<ComboBoxItem Content="H2" />
 				<ComboBoxItem Content="H3" />
 				<ComboBoxItem Content="H4" />
+				<ComboBoxItem Content="HZ" />
 			</ComboBox>
 			<Button Content="Modifier" VerticalAlignment="Top" HorizontalAlignment="Center" Width="75" Name="EditLockButton" Margin="10" Click="EditLockButton_Click"/>
 		</StackPanel>

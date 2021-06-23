@@ -35,7 +35,7 @@ namespace LockerConstructor
         {
             if (lock1.Type == lock2.Type)
                 return lock1.Type;
-            return (lock1.Type + "P/" + lock2.Type + "G");
+            return (lock1.Type + "P." + lock2.Type + "G");
         }
 
         public void AddLocker(Locker locker)
